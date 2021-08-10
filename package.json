@@ -1,0 +1,13 @@
+{
+  "name": "enet.js",
+  "version": "0.1.0",
+  "description": "(WIP) Node.js port of ENet.",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^16.4.13",
+    "typescript": "^4.3.5"
+  },
+  "scripts": {},
+  "author": "Alexander9673",
+  "license": "MIT"
+}
