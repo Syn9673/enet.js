@@ -81,6 +81,7 @@ export class ENetPacket {
   public userData: Buffer;
 }
 
+// Size: 210
 export class ENetAcknowledgement {
   public acknowledgementList: ENetListNode = new ENetListNode();
   public sentTime: enet_uint32;
@@ -185,7 +186,7 @@ export class ENetPeer {
   public state: ENetPeerState;
   public channels: ENetChannel[];
   public channelCount: number;
-  public incomingBandwitdh: enet_uint32;
+  public incomingBandwidth: enet_uint32;
   public outgoingBandwidth: enet_uint32;
   public incomingBandwidthThrottleEpoch: enet_uint32;
   public outgoingBandwidthThrottleEpoch: enet_uint32;
@@ -211,8 +212,8 @@ export class ENetPeer {
   public timeoutLimit: enet_uint32;
   public timeoutMaximum: enet_uint32;
   public timeoutMinimum: enet_uint32;
-  public lastRoundtripTime: enet_uint32;
-  public lowestRoundtripTime: enet_uint32;
+  public lastRoundTripTime: enet_uint32;
+  public lowestRoundTripTime: enet_uint32;
   public lastRoundTripTimeVariance: enet_uint32;
   public highestRoundTripTimeVariance: enet_uint32;
   public roundTripTime: enet_uint32;

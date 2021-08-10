@@ -61,7 +61,7 @@ export class ENetProtocolCommandHeader {
  * Size: 8
  */
 export class ENetProtocolAcknowledge {
-  public header: ENetProtocolCommandHeader;
+  public header: ENetProtocolCommandHeader = new ENetProtocolCommandHeader();
   public receivedReliableSequenceNumber: enet_uint16;
   public receivedSentTime: enet_uint16;
 }
@@ -70,7 +70,7 @@ export class ENetProtocolAcknowledge {
  * Size: 48
  */
 export class ENetProtocolConnect {
-  public header: ENetProtocolCommandHeader;
+  public header: ENetProtocolCommandHeader = new ENetProtocolCommandHeader();
   public outgoingPeerID: enet_uint16;
   public incomingSessionID: enet_uint8;
   public outgoingSessionID: enet_uint8;
@@ -90,7 +90,7 @@ export class ENetProtocolConnect {
  * Size: 44
  */
 export class ENetProtocolVerifyConnect {
-  public header: ENetProtocolCommandHeader;
+  public header: ENetProtocolCommandHeader = new ENetProtocolCommandHeader();
   public outgoingPeerID: enet_uint16;
   public incomingSessionID: enet_uint8;
   public outgoingSessionID: enet_uint8;
@@ -109,7 +109,7 @@ export class ENetProtocolVerifyConnect {
  * Size: 12
  */
 export class ENetProtocolBandwidthLimit {
-  public header: ENetProtocolCommandHeader;
+  public header: ENetProtocolCommandHeader = new ENetProtocolCommandHeader();
   public incomingBandwidth: enet_uint32;
   public outgoingBandwidth: enet_uint32;
 }
@@ -118,7 +118,7 @@ export class ENetProtocolBandwidthLimit {
  * Size: 16
  */
 export class ENetProtocolThrottleConfigure {
-  public header: ENetProtocolCommandHeader;
+  public header: ENetProtocolCommandHeader = new ENetProtocolCommandHeader();
   public packetThrottleInterval: enet_uint32;
   public packetThrottleAcceleration: enet_uint32;
   public packetThrottleDeceleration: enet_uint32;
@@ -128,7 +128,7 @@ export class ENetProtocolThrottleConfigure {
  * Size: 8
  */
 export class ENetProtocolDisconnect {
-  public header: ENetProtocolCommandHeader;
+  public header: ENetProtocolCommandHeader = new ENetProtocolCommandHeader();
   public data: enet_uint32;
 }
 
@@ -136,14 +136,14 @@ export class ENetProtocolDisconnect {
  * Size: 4
  */
 export class ENetProtocolPing {
-  public header: ENetProtocolCommandHeader;
+  public header: ENetProtocolCommandHeader = new ENetProtocolCommandHeader();
 }
 
 /**
  * Size: 6
  */
 export class ENetProtocolSendReliable {
-  public header: ENetProtocolCommandHeader;
+  public header: ENetProtocolCommandHeader = new ENetProtocolCommandHeader();
   public dataLength: enet_uint16;
 }
 
@@ -151,7 +151,7 @@ export class ENetProtocolSendReliable {
  * Size: 8
  */
 export class ENetProtocolSendUnreliable {
-  public header: ENetProtocolCommandHeader;
+  public header: ENetProtocolCommandHeader = new ENetProtocolCommandHeader();
   public unreliableSequenceNumber: enet_uint16;
   public dataLength: enet_uint16;
 }
@@ -160,7 +160,7 @@ export class ENetProtocolSendUnreliable {
  * Size: 8
  */
 export class ENetProtocolSendUnsequenced {
-  public header: ENetProtocolCommandHeader;
+  public header: ENetProtocolCommandHeader = new ENetProtocolCommandHeader();
   public unsequencedGroup: enet_uint16;
   public dataLength: enet_uint16;
 }
@@ -169,7 +169,7 @@ export class ENetProtocolSendUnsequenced {
  * Size: 24
  */
 export class ENetProtocolSendFragment {
-  public header: ENetProtocolCommandHeader;
+  public header: ENetProtocolCommandHeader = new ENetProtocolCommandHeader();
   public startSequenceNumber: enet_uint16;
   public dataLength: enet_uint16;
   public fragmentCount: enet_uint32;
@@ -182,18 +182,18 @@ export class ENetProtocolSendFragment {
  * Size: 190
  */
 export class ENetProtocol {
-  public header: ENetProtocolCommandHeader;
-  public acknowledge: ENetProtocolAcknowledge;
-  public connect: ENetProtocolConnect;
-  public verifyConnect: ENetProtocolVerifyConnect;
-  public disconnect: ENetProtocolDisconnect;
-  public ping: ENetProtocolPing;
-  public sendReliable: ENetProtocolSendReliable;
-  public sendUnreliable: ENetProtocolSendUnreliable;
-  public sendUnsequenced: ENetProtocolSendUnsequenced;
-  public sendFragment: ENetProtocolSendFragment;
-  public bandwidthLimit: ENetProtocolBandwidthLimit;
-  public throttleConfigure: ENetProtocolThrottleConfigure;
+  public header: ENetProtocolCommandHeader = new ENetProtocolCommandHeader();
+  public acknowledge: ENetProtocolAcknowledge = new ENetProtocolAcknowledge();
+  public connect: ENetProtocolConnect = new ENetProtocolConnect();
+  public verifyConnect: ENetProtocolVerifyConnect = new ENetProtocolVerifyConnect();
+  public disconnect: ENetProtocolDisconnect = new ENetProtocolDisconnect();
+  public ping: ENetProtocolPing = new ENetProtocolDisconnect();
+  public sendReliable: ENetProtocolSendReliable = new ENetProtocolSendReliable();
+  public sendUnreliable: ENetProtocolSendUnreliable = new ENetProtocolSendUnreliable();
+  public sendUnsequenced: ENetProtocolSendUnsequenced = new ENetProtocolSendUnsequenced();
+  public sendFragment: ENetProtocolSendFragment = new ENetProtocolSendFragment();
+  public bandwidthLimit: ENetProtocolBandwidthLimit = new ENetProtocolBandwidthLimit();
+  public throttleConfigure: ENetProtocolThrottleConfigure = new ENetProtocolThrottleConfigure();
 }
 
 export const commandSizes = [
