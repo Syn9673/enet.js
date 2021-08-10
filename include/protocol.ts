@@ -1,6 +1,6 @@
 import { enet_uint16, enet_uint32, enet_uint8 } from "./types";
 
-enum ENetUnnamedProtocol {
+export enum ENetUnnamedProtocol {
   ENET_PROTOCOL_MINIMUM_MTU             = 576,
   ENET_PROTOCOL_MAXIMUM_MTU             = 4096,
   ENET_PROTOCOL_MAXIMUM_PACKET_COMMANDS = 32,
@@ -12,7 +12,7 @@ enum ENetUnnamedProtocol {
   ENET_PROTOCOL_MAXIMUM_FRAGMENT_COUNT  = 1024 * 1024
 }
 
-enum ENetProtocolCommand {
+export enum ENetProtocolCommand {
    ENET_PROTOCOL_COMMAND_NONE               = 0,
    ENET_PROTOCOL_COMMAND_ACKNOWLEDGE        = 1,
    ENET_PROTOCOL_COMMAND_CONNECT            = 2,
@@ -31,7 +31,7 @@ enum ENetProtocolCommand {
    ENET_PROTOCOL_COMMAND_MASK               = 0x0F
 }
 
-enum ENetProtocolFlag {
+export enum ENetProtocolFlag {
   ENET_PROTOCOL_COMMAND_FLAG_ACKNOWLEDGE = (1 << 7),
   ENET_PROTOCOL_COMMAND_FLAG_UNSEQUENCED = (1 << 6),
 
@@ -43,7 +43,7 @@ enum ENetProtocolFlag {
   ENET_PROTOCOL_HEADER_SESSION_SHIFT   = 12
 }
 
-class ENetProtocolHeader {
+export class ENetProtocolHeader {
   public peerID: enet_uint16;
   public sentTime: enet_uint16;
 }
@@ -51,7 +51,7 @@ class ENetProtocolHeader {
 /**
  * Size: 4
  */
-class ENetProtocolCommandHeader {
+export class ENetProtocolCommandHeader {
   public command: enet_uint8;
   public channelID: enet_uint8;
   public reliableSequenceNumber: enet_uint16;
@@ -60,7 +60,7 @@ class ENetProtocolCommandHeader {
 /**
  * Size: 8
  */
-class ENetProtocolAcknowledge {
+export class ENetProtocolAcknowledge {
   public header: ENetProtocolCommandHeader;
   public receivedReliableSequenceNumber: enet_uint16;
   public receivedSentTime: enet_uint16;
@@ -69,7 +69,7 @@ class ENetProtocolAcknowledge {
 /**
  * Size: 48
  */
-class ENetProtocolConnect {
+export class ENetProtocolConnect {
   public header: ENetProtocolCommandHeader;
   public outgoingPeerID: enet_uint16;
   public incomingSessionID: enet_uint8;
@@ -89,7 +89,7 @@ class ENetProtocolConnect {
 /**
  * Size: 44
  */
-class ENetProtocolVerifyConnect {
+export class ENetProtocolVerifyConnect {
   public header: ENetProtocolCommandHeader;
   public outgoingPeerID: enet_uint16;
   public incomingSessionID: enet_uint8;
@@ -108,7 +108,7 @@ class ENetProtocolVerifyConnect {
 /**
  * Size: 12
  */
-class ENetProtocolBandwidthLimit {
+export class ENetProtocolBandwidthLimit {
   public header: ENetProtocolCommandHeader;
   public incomingBandwidth: enet_uint32;
   public outgoingBandwidth: enet_uint32;
@@ -117,7 +117,7 @@ class ENetProtocolBandwidthLimit {
 /**
  * Size: 16
  */
-class ENetProtocolThrottleConfigure {
+export class ENetProtocolThrottleConfigure {
   public header: ENetProtocolCommandHeader;
   public packetThrottleInterval: enet_uint32;
   public packetThrottleAcceleration: enet_uint32;
@@ -127,7 +127,7 @@ class ENetProtocolThrottleConfigure {
 /**
  * Size: 8
  */
-class ENetProtocolDisconnect {
+export class ENetProtocolDisconnect {
   public header: ENetProtocolCommandHeader;
   public data: enet_uint32;
 }
@@ -135,14 +135,14 @@ class ENetProtocolDisconnect {
 /**
  * Size: 4
  */
-class ENetProtocolPing {
+export class ENetProtocolPing {
   public header: ENetProtocolCommandHeader;
 }
 
 /**
  * Size: 6
  */
-class ENetProtocolSendReliable {
+export class ENetProtocolSendReliable {
   public header: ENetProtocolCommandHeader;
   public dataLength: enet_uint16;
 }
@@ -150,7 +150,7 @@ class ENetProtocolSendReliable {
 /**
  * Size: 8
  */
-class ENetProtocolSendUnreliable {
+export class ENetProtocolSendUnreliable {
   public header: ENetProtocolCommandHeader;
   public unreliableSequenceNumber: enet_uint16;
   public dataLength: enet_uint16;
@@ -159,7 +159,7 @@ class ENetProtocolSendUnreliable {
 /**
  * Size: 8
  */
-class ENetProtocolSendUnsequenced {
+export class ENetProtocolSendUnsequenced {
   public header: ENetProtocolCommandHeader;
   public unsequencedGroup: enet_uint16;
   public dataLength: enet_uint16;
@@ -168,7 +168,7 @@ class ENetProtocolSendUnsequenced {
 /**
  * Size: 24
  */
-class ENetProtocolSendFragment {
+export class ENetProtocolSendFragment {
   public header: ENetProtocolCommandHeader;
   public startSequenceNumber: enet_uint16;
   public dataLength: enet_uint16;
@@ -181,7 +181,7 @@ class ENetProtocolSendFragment {
 /**
  * Size: 190
  */
-class ENetProtocol {
+export class ENetProtocol {
   public header: ENetProtocolCommandHeader;
   public acknowledge: ENetProtocolAcknowledge;
   public connect: ENetProtocolConnect;
@@ -196,7 +196,7 @@ class ENetProtocol {
   public throttleConfigure: ENetProtocolThrottleConfigure;
 }
 
-const commandSizes = [
+export const commandSizes = [
   0,  // ??
   8,  // ENetProtocolAcknowledge
   48, // ENetProtocolConnect
@@ -212,28 +212,8 @@ const commandSizes = [
   24, // ENetProtocolSendFragment
 ]
 
-const enet_protocol_command_size = (commandNumber: enet_uint8) => (
+export const enet_protocol_command_size = (commandNumber: enet_uint8) => (
   commandSizes[commandNumber & ENetProtocolCommand.ENET_PROTOCOL_COMMAND_MASK]
 )
 
 // todo: enet_protocol_change_state 
-
-export {
-  ENetUnnamedProtocol,
-  ENetProtocolCommand,
-  ENetProtocolFlag,
-  ENetProtocolHeader,
-  ENetProtocolCommandHeader,
-  ENetProtocolAcknowledge,
-  ENetProtocolConnect,
-  ENetProtocolVerifyConnect,
-  ENetProtocolDisconnect,
-  ENetProtocolPing,
-  ENetProtocolSendReliable,
-  ENetProtocolSendUnreliable,
-  ENetProtocolSendUnsequenced,
-  ENetProtocolSendFragment,
-  ENetProtocolBandwidthLimit,
-  ENetProtocolThrottleConfigure,
-  ENetProtocol,
-}
